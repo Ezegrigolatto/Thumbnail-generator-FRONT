@@ -19,7 +19,7 @@
     right: calc(30% - 30vh);
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 900px){
     .landingContainer{
         width: 100vw;
         top: 20vh;

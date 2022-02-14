@@ -120,4 +120,22 @@
     width: 10rem;
     margin-bottom: 1rem;
   }
+
+  .logoutButton{
+    top: 0;
+    left: 0;
+  }
+
+  .homeButton {
+    top: 2.5rem;
+    left: 0;
+  }
+
+  .finalFile {
+    min-width: 50%;
+    min-height: 30%;
+    max-width: 90%;
+    max-height: 60%;
+    margin-top: 8rem
+  }
 }
