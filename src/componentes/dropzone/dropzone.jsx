@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { FiUpload } from "react-icons/fi";
-import { BiLogOut } from "react-icons/bi"
-import "./dropzone.css"
+import { BiLogOut } from "react-icons/bi";
+import "./dropzone.css";
 
 import {
   sendVideo,
@@ -19,7 +19,7 @@ export default function Dropzone() {
   const { user, isLoading, logout, isAuthenticated } = useAuth0();
   function Previews() {
     const dispatch = useDispatch();
-    
+
     const [files, setFiles] = useState([]);
     const { getRootProps, getInputProps } = useDropzone({
       accept: "image/*, video/*",
@@ -42,7 +42,7 @@ export default function Dropzone() {
         if (prev?.type.includes("image")) {
           const data = new FormData();
           data.append("file", prev);
-          dispatch(sendImage({data:data, file:prev.name}));
+          dispatch(sendImage({ data: data, file: prev.name }));
           setFiles([]);
           dispatch(setLoading(true));
           navigate("/preview");
@@ -57,58 +57,61 @@ export default function Dropzone() {
       }
     };
 
+    /*eslint-disable */
     useEffect(() => {
       files.forEach((file) => URL.revokeObjectURL(file.preview));
     }, [files]);
 
-    /*eslint-disable */
     useEffect(() => {
       dispatch(setLoading(false));
       dispatch(resetState());
-    },[])
+    }, []);
     /*eslint-enable */
 
     return (
-      <section >
+      <section>
         <div {...getRootProps({ className: "dropzone" })}>
           <input {...getInputProps()} />
-          <p>Drop your file here or click to select</p> 
-          <FiUpload/>
+          <p>Drop your file here or click to select</p>
+          <FiUpload />
         </div>
         <aside>{thumbs()}</aside>
       </section>
     );
   }
 
-/*eslint-disable */
+  /*eslint-disable */
   useEffect(() => {
     if (!isAuthenticated && !isLoading) {
       navigate("/");
     }
   }, [user, isLoading, navigate]);
   useEffect(() => {
-    
     if (!isAuthenticated && !isLoading) {
       navigate("/");
     }
   }, []);
-/*eslint-enable */
+  /*eslint-enable */
 
-  return <div className="container">
+  return (
+    <div className="container">
       <div className="logoutButton">
-      <BiLogOut/>
-      <button className="btnL" onClick={()=>logout()}>
-        Logout
-      </button>
+        <BiLogOut />
+        <button className="btnL" onClick={() => logout()}>
+          Logout
+        </button>
       </div>
-    <div className="dropzoneBox">
-    <h1>Welcome to Thumbnail Generator App</h1>
-    <div>{Previews()}</div>
-    <h2>How it works?</h2>
-    <p>- Upload your file (video .mp4 or image .jpg/.png).</p>
-    <p>- If you upload an image, you can edit it.</p>
-    <p>- If you upload a video, the app processes the video and return one image,
-      after that, you can edit the image returned. </p>
+      <div className="dropzoneBox">
+        <h1>Welcome to Thumbnail Generator App</h1>
+        <div>{Previews()}</div>
+        <h2>How it works?</h2>
+        <p>- Upload your file (video .mp4 or image .jpg/.png).</p>
+        <p>- If you upload an image, you can edit it.</p>
+        <p>
+          - If you upload a video, the app processes the video and return one
+          image, after that, you can edit the image returned.{" "}
+        </p>
+      </div>
     </div>
-    </div>;
+  );
 }

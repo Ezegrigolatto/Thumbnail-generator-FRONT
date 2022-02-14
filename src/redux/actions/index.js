@@ -1,20 +1,22 @@
 import axios from "axios";
-const server = "https://thumb-generator-server.herokuapp.com"
+const server = "https://thumb-generator-server.herokuapp.com";
 
 export function sendVideo(payload) {
   return function (dispatch) {
-    return axios
-      .post(`${server}/video`, payload)
-      // .post("http://localhost:3001/video", payload)
-      .then((response) => {
-        dispatch({
-          type: "GET_THUMBNAIL",
-          payload: response.data,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    return (
+      axios
+        .post(`${server}/video`, payload)
+        // .post("http://localhost:3001/video", payload)
+        .then((response) => {
+          dispatch({
+            type: "GET_THUMBNAIL",
+            payload: response.data,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    );
   };
 }
 
@@ -51,7 +53,7 @@ export function setLoading(payload) {
   };
 }
 
-export function reloadThumbnail (payload) {
+export function reloadThumbnail(payload) {
   return function (dispatch) {
     return axios
       .get(`${server}/thumbnail`)

@@ -10,7 +10,6 @@ import { ImHome3 } from "react-icons/im";
 import { BiLogOut } from "react-icons/bi";
 
 const editImage = (image, done) => {
-  
   const imageFile = image.pintura ? image.pintura.file : image;
   const imageState = image.pintura ? image.pintura.data : {};
 
@@ -78,7 +77,7 @@ function Pint() {
     });
   };
 
-/*eslint-disable */
+  /*eslint-disable */
   useEffect(
     () => () => {
       // Make sure to revoke the Object URL to avoid memory leaks
@@ -93,7 +92,6 @@ function Pint() {
     }
   }, [user, isLoading, navigate]);
   useEffect(() => {
-    
     if (!isAuthenticated && !isLoading) {
       navigate("/");
     }
@@ -107,10 +105,8 @@ function Pint() {
         <ImHome3 /> Homepage
       </a>
       <div className="logoutButton">
-      <BiLogOut/>
-      <button  onClick={()=>logout()}>
-        Logout
-      </button>
+        <BiLogOut />
+        <button onClick={() => logout()}>Logout</button>
       </div>
       {files[0]?.preview ? (
         <img className="finalFile" src={files[0].preview} alt="preview"></img>
