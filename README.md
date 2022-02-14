@@ -3,7 +3,7 @@
 This project was bootstrapped with Create React App
 
 To run this project in your PC you need to clone it, then run in your terminal
-### `npm install`, ### `npm start`.
+### `npm install`, `npm start`.
 
 
 # Features
