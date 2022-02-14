@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable */
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+/*eslint-enable*/
+import Dropzone from './componentes/dropzone/dropzone'
+import Prev from './componentes/preview/preview'
+import Editor from './componentes/editor/editor'
+import Webc from "./componentes/webcam/webcam";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <Routes>
+      <Route exact path="/" element={ <Dropzone/>} />
+      <Route path="/preview" element={ <Prev/>} />
+      <Route path="/edit" element={ <Editor/>} />
+      <Route path="/webcam" element={<Webc/>} />
+      </Routes>
     </div>
   );
 }

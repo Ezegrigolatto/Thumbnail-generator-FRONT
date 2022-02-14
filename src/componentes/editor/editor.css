@@ -1,0 +1,83 @@
+.editorContainer {
+  background-image: url("../../assets/abst.jpg");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 25% 75%;
+  width: 100vw;
+  height: 100vh;
+}
+
+.finalFile {
+  /* background-color: rgba(0, 0, 0, 0.589); */
+  border: 3px dashed #000000;
+  padding: 5px;
+  margin: 5px;
+  min-width: 30%;
+  min-height: 30%;
+  max-width: 50%;
+  max-height: 60%;
+  margin-top: 5rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1rem;
+  width: 30vw;
+}
+
+.buttons button {
+  width: 10rem;
+}
+
+.homeButton {
+  position: absolute;
+  top: 1rem;
+  left: 2rem;
+  text-decoration: none;
+  color: #000000;
+  font-size: 1.5rem;
+}
+.homeButton:hover {
+  filter:drop-shadow(0 0 0.5rem #000000);
+}
+
+@media screen and (max-width: 600px) {
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .buttons button {
+    width: 10rem;
+    margin-bottom: 1rem;
+  }
+  .finalFile {
+    min-width: 50%;
+    min-height: 30%;
+    max-width: 90%;
+    max-height: 60%;
+  }
+
+  .editorContainer {
+    background-size: cover;
+    /* background-repeat: no-repeat; */
+    background-position: 25% 75%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .buttons button {
+    width: 10rem;
+    margin-bottom: 1rem;
+  }
+}
