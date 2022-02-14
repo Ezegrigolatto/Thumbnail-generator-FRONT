@@ -2,7 +2,9 @@ import { useDropzone } from "react-dropzone";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import { FiUpload } from "react-icons/fi";
+import { BiLogOut } from "react-icons/bi"
 import "./dropzone.css"
 
 import {
@@ -14,6 +16,7 @@ import {
 
 export default function Dropzone() {
   const navigate = useNavigate();
+  const { user, isLoading, logout, isAuthenticated } = useAuth0();
   function Previews() {
     const dispatch = useDispatch();
     
@@ -77,16 +80,30 @@ export default function Dropzone() {
     );
   }
 
-  const webcam= () => {
-    navigate("/webcam")
-  }
+/*eslint-disable */
+  useEffect(() => {
+    if (!isAuthenticated && !isLoading) {
+      navigate("/");
+    }
+  }, [user, isLoading, navigate]);
+  useEffect(() => {
+    
+    if (!isAuthenticated && !isLoading) {
+      navigate("/");
+    }
+  }, []);
+/*eslint-enable */
 
   return <div className="container">
+      <div className="logoutButton">
+      <BiLogOut/>
+      <button className="btnL" onClick={()=>logout()}>
+        Logout
+      </button>
+      </div>
     <div className="dropzoneBox">
     <h1>Welcome to Thumbnail Generator App</h1>
     <div>{Previews()}</div>
-    <h1>Or</h1>
-    <button onClick={webcam}> Try with webcam</button>
     <h2>How it works?</h2>
     <p>- Upload your file (video .mp4 or image .jpg/.png).</p>
     <p>- If you upload an image, you can edit it.</p>

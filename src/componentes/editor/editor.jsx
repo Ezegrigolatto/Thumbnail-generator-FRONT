@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-
+import { useAuth0 } from "@auth0/auth0-react";
 import { openDefaultEditor } from "../pintura/pintura";
+import { useNavigate } from "react-router-dom";
 import "../pintura/pintura.css";
 import "./editor.css";
 import JsFileDownloader from "js-file-downloader";
 import { ImHome3 } from "react-icons/im";
+import { BiLogOut } from "react-icons/bi";
 
 const editImage = (image, done) => {
+  
   const imageFile = image.pintura ? image.pintura.file : image;
   const imageState = image.pintura ? image.pintura.data : {};
 
@@ -29,6 +32,8 @@ const editImage = (image, done) => {
 };
 
 function Pint() {
+  const { user, isLoading, logout, isAuthenticated } = useAuth0();
+  const navigate = useNavigate();
   const path = useSelector((state) => state.thumbnail.path);
   const [files, setFiles] = useState([]);
   useEffect(() => {
@@ -73,6 +78,7 @@ function Pint() {
     });
   };
 
+/*eslint-disable */
   useEffect(
     () => () => {
       // Make sure to revoke the Object URL to avoid memory leaks
@@ -81,12 +87,31 @@ function Pint() {
     [files]
   );
 
+  useEffect(() => {
+    if (!isAuthenticated && !isLoading) {
+      navigate("/");
+    }
+  }, [user, isLoading, navigate]);
+  useEffect(() => {
+    
+    if (!isAuthenticated && !isLoading) {
+      navigate("/");
+    }
+  }, []);
+  /*eslint-enable */
+
   return (
     <section className="editorContainer">
-      <a className="homeButton" href={`/`}>
+      <a className="homeButton" href={`/home`}>
         {" "}
         <ImHome3 /> Homepage
       </a>
+      <div className="logoutButton">
+      <BiLogOut/>
+      <button  onClick={()=>logout()}>
+        Logout
+      </button>
+      </div>
       {files[0]?.preview ? (
         <img className="finalFile" src={files[0].preview} alt="preview"></img>
       ) : (

@@ -36,7 +36,7 @@
 
 .homeButton {
   position: absolute;
-  top: 1rem;
+  top: 5rem;
   left: 2rem;
   text-decoration: none;
   color: #000000;
@@ -44,6 +44,31 @@
 }
 .homeButton:hover {
   filter:drop-shadow(0 0 0.5rem #000000);
+}
+
+.logoutButton{
+  position: absolute;
+  top: 1rem;
+  left: 2rem;
+  font-size: 1.5rem;
+  background-color:transparent;
+  border:none;
+  font-family: "GloriaHallelujah";
+}
+.logoutButton button {
+  font-size: 1.5rem;
+  background-color:transparent;
+  border:none;
+  font-family: "GloriaHallelujah";
+}
+
+.logoutButton:hover{
+  filter:drop-shadow(0 0 0.5rem #000000);
+  cursor: pointer
+}
+
+.logoutButton button:hover {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 600px) {
@@ -68,6 +93,21 @@
     /* background-repeat: no-repeat; */
     background-position: 25% 75%;
   }
+
+  .finalFile{
+    margin-top:10rem;
+  }
+
+  .logoutButton{
+    top: 0;
+    left: 0;
+  }
+
+  .homeButton {
+    top: 2.5rem;
+    left: 0;
+  }
+
 }
 
 @media screen and (max-width: 900px) {

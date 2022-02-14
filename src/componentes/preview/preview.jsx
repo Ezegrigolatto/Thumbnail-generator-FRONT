@@ -1,14 +1,19 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
 import { setLoading } from "../../redux/actions";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ImHome3 } from "react-icons/im";
+import { BiLogOut } from "react-icons/bi";
 import "./preview.css"
 
 export default function Prev() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const prev = useSelector((state) => state.thumbnail);
-  const isLoading = useSelector((state) => state.loading);
+  const isLoad = useSelector((state) => state.loading);
+  const { user, isLoading, logout, isAuthenticated } = useAuth0();
+  
 
   const edit = () => {
     navigate("/edit");
@@ -20,12 +25,34 @@ export default function Prev() {
       dispatch(setLoading(false));
     }
   }, [prev]);
-  /*eslint-enable*/
-
+ 
+  
+  useEffect(() => {
+    if (!isAuthenticated && !isLoading) {
+      navigate("/");
+    }
+  }, [user, isLoading, navigate]);
+  useEffect(() => {
+    
+    if (!isAuthenticated && !isLoading) {
+      navigate("/");
+    }
+  }, []);
+ /*eslint-enable*/
 
   return (
     <div className="prevContainer">
-      {prev.path.length === 0 && isLoading ? (
+       <a className="homeButton" href={`/home`}>
+        {" "}
+        <ImHome3 /> Homepage
+      </a>
+      <div className="logoutButton">
+      <BiLogOut/>
+      <button  onClick={()=>logout()}>
+        Logout
+      </button>
+      </div>
+      {prev.path.length === 0 && isLoad ? (
         <div className="loading">
           <div className="spinner"></div>
         </div>
